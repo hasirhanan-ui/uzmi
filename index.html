@@ -2,139 +2,472 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Uzmi ❤️</title>
-
 <style>
-body {
-  margin: 0;
-  padding: 0;
-  background: black;
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-  text-align: center;
-  overflow: hidden;
-}
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background: #0d0214;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    text-align: center;
+  }
+  .screen {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background: radial-gradient(circle, #240b36 0%, #0d0214 100%);
+  }
+  .active {
+    display: flex;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
 
-.screen {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-size: 26px;
-  padding: 20px;
-}
+  /* Buttons */
+  button, .btn {
+    margin-top: 25px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 10;
+  }
+  button:active, .btn:active {
+    transform: scale(0.95);
+  }
 
-.active {
-  display: flex;
-}
+  /* Countdown */
+  .counter {
+    font-size: 120px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #f5576c, #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulse 1s infinite alternate;
+  }
+  @keyframes pulse {
+    from { transform: scale(0.9); } to { transform: scale(1.1); }
+  }
 
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  background: pink;
-  color: black;
-  font-size: 16px;
-}
+  /* Decorative elements */
+  .banners {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    font-size: 35px;
+    letter-spacing: 5px;
+    display: none;
+  }
+  .show-banners { display: block; }
 
-/* Final Screen */
-.final h1 {
-  font-size: 40px;
-  background: linear-gradient(to right, pink, violet);
-  -webkit-background-clip: text;
-  color: transparent;
-}
+  /* Cake Design */
+  .cake-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin-top: 20px;
+  }
+  .cake {
+    position: absolute;
+    bottom: 20px;
+    width: 160px;
+    height: 90px;
+    background: #4a2c11;
+    border-radius: 15px 15px 5px 5px;
+    left: 20px;
+    box-shadow: 0 8px 0 #331e0b;
+  }
+  .cream {
+    position: absolute;
+    top: -5px;
+    width: 100%;
+    height: 25px;
+    background: #fff;
+    border-radius: 15px 15px 10px 10px;
+  }
+  .cream-drip {
+    position: absolute;
+    top: 15px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+  }
+  .candle {
+    position: absolute;
+    bottom: 110px;
+    left: 93px;
+    width: 14px;
+    height: 45px;
+    background: linear-gradient(to right, #e65c00, #f9d423);
+    border-radius: 3px;
+    display: none;
+  }
+  .flame {
+    position: absolute;
+    top: -15px;
+    left: -1px;
+    width: 16px;
+    height: 16px;
+    background: #ff9900;
+    border-radius: 50% 50% 20% 50%;
+    transform: rotate(-45deg);
+    box-shadow: 0 0 15px #ff9900;
+    animation: flicker 0.1s infinite alternate;
+    display: none;
+  }
+  @keyframes flicker {
+    from { transform: rotate(-45deg) scale(0.9); }
+    to { transform: rotate(-45deg) scale(1.1); }
+  }
 
-.cake {
-  font-size: 80px;
-  margin: 20px;
-  animation: bounce 2s infinite;
-}
+  /* Balloons */
+  .balloon-zone {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+    margin-top: 20px;
+  }
+  .balloon {
+    width: 60px;
+    height: 75px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    position: relative;
+    cursor: pointer;
+    animation: floatUp 3s ease-in-out infinite alternate;
+  }
+  .balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 27px;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 8px solid currentColor;
+  }
+  .string {
+    position: absolute;
+    bottom: -70px;
+    left: 29px;
+    width: 2px;
+    height: 70px;
+    background: rgba(255,255,255,0.4);
+  }
+  .b1 { background: #ff4757; color: #ff4757; animation-delay: 0s; }
+  .b2 { background: #ffa502; color: #ffa502; animation-delay: 0.4s; }
+  .b3 { background: #2ed573; color: #2ed573; animation-delay: 0.2s; }
+  .b4 { background: #1e90ff; color: #1e90ff; animation-delay: 0.6s; }
+  
+  @keyframes floatUp {
+    from { transform: translateY(10px); } to { transform: translateY(-15px); }
+  }
+  .popped {
+    transform: scale(0) !important;
+    transition: transform 0.2s ease-out;
+  }
+  .revealed-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff79cd;
+    margin-top: 15px;
+    min-height: 35px;
+  }
 
-@keyframes bounce {
-  0%,100% {transform: translateY(0);}
-  50% {transform: translateY(-15px);}
-}
+  /* Swipe Cards Stack */
+  .card-deck {
+    position: relative;
+    width: 280px;
+    height: 360px;
+    margin: 20px auto;
+  }
+  .memory-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 15px;
+    padding: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    color: #333;
+    cursor: grab;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform-origin: bottom center;
+  }
+  .card-img {
+    width: 100%;
+    height: 85%;
+    background: #ddd;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  .card-desc {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #555;
+  }
 
-/* Hearts */
-.heart {
-  position: absolute;
-  color: pink;
-  animation: float 5s linear infinite;
-}
+  /* Letter Card */
+  .letter-box {
+    width: 300px;
+    height: 400px;
+    background: linear-gradient(135deg, #ffeef8 0%, #ffd3ec 100%);
+    border-radius: 20px;
+    color: #4a0e2e;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(255,105,180,0.3);
+    overflow-y: auto;
+    text-align: left;
+    line-height: 1.6;
+    font-size: 17px;
+    display: none;
+    border: 3px solid #ff79cd;
+  }
+  .letter-cover {
+    width: 280px;
+    height: 350px;
+    background: #ff4757;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
 
-@keyframes float {
-  from {transform: translateY(100vh);}
-  to {transform: translateY(-10vh);}
-}
+  /* Floating background hearts */
+  .bg-heart {
+    position: absolute;
+    color: rgba(255, 105, 180, 0.4);
+    pointer-events: none;
+    animation: float 6s linear infinite;
+    bottom: -50px;
+    z-index: 1;
+  }
+  @keyframes float {
+    to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+  }
 </style>
 </head>
-
 <body>
 
-<!-- Screens -->
-<div class="screen active" id="s1">
-  <p>Hey Uzmi... ❤️</p>
-  <button onclick="next(1)">Next ➡️</button>
-</div>
+  <div class="screen active" id="s1">
+    <p style="font-size: 26px;">Hey Uzmi... 👀❤️</p>
+    <button onclick="nextScreen(1)">Next ➡️</button>
+  </div>
 
-<div class="screen" id="s2">
-  <p>Mujhe tumse kuch kehna hai... 🥺</p>
-  <button onclick="next(2)">Next ➡️</button>
-</div>
+  <div class="screen" id="s2">
+    <p style="font-size: 26px;">Mujhe tumse kuch kehna hai... 🥺</p>
+    <button onclick="startCountdown()">See Why? 🎉</button>
+  </div>
 
-<div class="screen" id="s3">
-  <p>Par pehle ek smile to karo 😊</p>
-  <button onclick="next(3)">Next ➡️</button>
-</div>
+  <div class="screen" id="s3">
+    <div class="counter" id="countdown-number">3</div>
+    <p style="margin-top: 15px; font-size: 20px; color: #ff9f43;">Crafting your special moment...</p>
+  </div>
 
-<div class="screen" id="s4">
-  <p>Aaj ka din bohat special hai 🎉</p>
-  <button onclick="next(4)">Next ➡️</button>
-</div>
+  <div class="screen" id="s4">
+    <p style="font-size: 26px; font-weight: bold; margin-bottom: 10px;">Meri Uzmi ka birthday hai aaj! 🎂🥳</p>
+    <p style="font-size: 18px; color: #fbc531;">Yes, it's YOU! A little surprise awaits...</p>
+    <button onclick="nextScreen(4)">Start the surprise ✨</button>
+  </div>
 
-<div class="screen" id="s5">
-  <p>Kyun ke aaj meri Uzmi ka birthday hai 💖</p>
-  <button onclick="next(5)">Next ➡️</button>
-</div>
+  <div class="screen" id="s5">
+    <div class="banners" id="party-banners">🎉🎈🎊🥳🎊🎈🎉</div>
+    <h2 id="cake-title" style="margin-bottom: 15px;">A fresh cake for you!</h2>
+    <div class="cake-container">
+      <div class="cake">
+        <div class="cream"></div>
+        <div class="cream-drip" style="left: 10px;"></div>
+        <div class="cream-drip" style="left: 45px; height: 30px;"></div>
+        <div class="cream-drip" style="left: 85px;"></div>
+        <div class="cream-drip" style="left: 125px; height: 35px;"></div>
+      </div>
+      <div class="candle" id="main-candle">
+        <div class="flame" id="main-flame"></div>
+      </div>
+    </div>
+    <button id="cake-action-btn" onclick="handleCakeStage()">Decorate ✨</button>
+  </div>
 
-<!-- Final -->
-<div class="screen final" id="s6">
-  <h1>Happy Birthday Uzmi ❤️</h1>
-  <div class="cake">🎂</div>
-  <p>
-    Uzmi 💕 <br><br>
-    Tum meri life ka sab se khoobsurat hissa ho 🥺❤️ <br>
-    Tumhari har baat mujhe khushi deti hai 😘 <br><br>
-    Main hamesha tumhare sath rahunga 💞 <br>
-    I Love You So Much Uzmi ❤️♾️
-  </p>
-</div>
+  <div class="screen" id="s6">
+    <h3 style="margin-bottom: 5px;">Pop all 4 balloons! 🎈</h3>
+    <div class="balloon-zone">
+      <div class="balloon b1" id="bal1" onclick="popBalloon(1, 'Uzmi')"><div class="string"></div></div>
+      <div class="balloon b2" id="bal2" onclick="popBalloon(2, 'is')"><div class="string"></div></div>
+      <div class="balloon b3" id="bal3" onclick="popBalloon(3, 'the')"><div class="string"></div></div>
+      <div class="balloon b4" id="bal4" onclick="popBalloon(4, 'Best! ❤️')"><div class="string"></div></div>
+    </div>
+    <div class="revealed-text" id="balloon-message"></div>
+    <button id="balloon-next-btn" style="display:none;" onclick="nextScreen(6)">Next ➡️</button>
+  </div>
+
+  <div class="screen" id="s7">
+    <h3 style="margin-bottom: 10px; color: #ff79cd;">Some Sweet Memories 💕</h3>
+    <p style="font-size: 14px; color: #aaa; margin-bottom: 10px;">(Swipe or click the card to reveal next)</p>
+    <div class="card-deck" onclick="swipeCard()">
+      <div class="memory-card" id="c3" style="transform: rotate(3deg);">
+        <img class="card-img" src="https://picsum.photos/300/400?random=3" alt="Memory 3">
+        <div class="card-desc">Always stay happy! 🤗❤️</div>
+      </div>
+      <div class="memory-card" id="c2" style="transform: rotate(-2deg);">
+        <img class="card-img" src="https://picsum.photos/300/400?random=2" alt="Memory 2">
+        <div class="card-desc">Your beautiful smile... ✨</div>
+      </div>
+      <div class="memory-card" id="c1">
+        <img class="card-img" src="https://picsum.photos/300/400?random=1" alt="Memory 1">
+        <div class="card-desc">The best person ever 💖</div>
+      </div>
+    </div>
+    <button id="deck-next-btn" style="display:none;" onclick="nextScreen(7)">Open My Message ✉️</button>
+  </div>
+
+  <div class="screen" id="s8">
+    <div class="letter-cover" id="envelope" onclick="openLetter()">
+      <span style="font-size: 50px;">✉️</span>
+      <h3 style="margin-top: 15px; color: white;">A Special Message</h3>
+      <p style="font-size: 14px; opacity: 0.8; margin-top: 5px;">Tap to Open</p>
+    </div>
+
+    <div class="letter-box" id="letter">
+      <h3 style="text-align: center; color: #ff4757; margin-bottom: 15px;">Happy Birthday Uzmi! 💖</h3>
+      <p>
+        Uzmi 💕 <br><br>
+        Tum meri life ka sab se khoobsurat hissa ho 🥺❤️ <br>
+        Tumhari har baat mujhe khushi deti hai 😘 <br><br>
+        Main hamesha tumhare sath rahunga 💞 <br>
+        I Love You So Much Uzmi ❤️♾️
+      </p>
+    </div>
+  </div>
 
 <script>
-function next(n) {
-  document.getElementById("s"+n).classList.remove("active");
-  document.getElementById("s"+(n+1)).classList.add("active");
-}
+  // Global screen tracking
+  function nextScreen(currentId) {
+    document.getElementById('s' + currentId).classList.remove('active');
+    document.getElementById('s' + (currentId + 1)).append; // Pre-load step safely
+    document.getElementById('s' + (currentId + 1)).classList.add('active');
+  }
 
-/* Hearts animation */
-setInterval(() => {
-  let heart = document.createElement("div");
-  heart.innerHTML = "❤️";
-  heart.className = "heart";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 25 + 10 + "px";
-  document.body.appendChild(heart);
+  // Countdown timer logic
+  function startCountdown() {
+    nextScreen(2);
+    let count = 3;
+    const numElement = document.getElementById('countdown-number');
+    const interval = setInterval(() => {
+      count--;
+      if(count > 0) {
+        numElement.innerText = count;
+      } else {
+        clearInterval(interval);
+        nextScreen(3);
+      }
+    }, 1000);
+  }
 
-  setTimeout(() => {
-    heart.remove();
-  }, 5000);
-}, 300);
+  // Cake Stage Transitions
+  let cakeStage = 0;
+  function handleCakeStage() {
+    const actionBtn = document.getElementById('cake-action-btn');
+    const candle = document.getElementById('main-candle');
+    const flame = document.getElementById('main-flame');
+    const banners = document.getElementById('party-banners');
+    const title = document.getElementById('cake-title');
+
+    if (cakeStage === 0) {
+      banners.classList.add('show-banners');
+      candle.style.display = 'block';
+      title.innerText = "Looks delicious! Let's complete it.";
+      actionBtn.innerText = "Light the Candle 🕯️";
+      cakeStage = 1;
+    } else if (cakeStage === 1) {
+      flame.style.display = 'block';
+      title.innerHTML = "<span style='color:#ff79cd;'>Happy Birthday, Uzmi!</span> 🥳";
+      actionBtn.innerText = "Pop the Balloons 🎉";
+      cakeStage = 2;
+    } else {
+      nextScreen(5);
+    }
+  }
+
+  // Balloon popping functionality
+  let poppedCount = 0;
+  let combinedMessage = [];
+  function popBalloon(id, text) {
+    const balloon = document.getElementById('bal' + id);
+    if (!balloon.classList.contains('popped')) {
+      balloon.classList.add('popped');
+      combinedMessage.push(text);
+      document.getElementById('balloon-message').innerText = combinedMessage.join(" ");
+      poppedCount++;
+      
+      if(poppedCount === 4) {
+        document.getElementById('balloon-next-btn').style.display = 'inline-block';
+      }
+    }
+  }
+
+  // Card deck mechanism
+  let currentCardIndex = 1;
+  function swipeCard() {
+    if(currentCardIndex <= 3) {
+      const card = document.getElementById('c' + currentCardIndex);
+      card.style.transform = 'translateX(150vw) rotate(30deg)';
+      card.style.opacity = '0';
+      currentCardIndex++;
+      
+      if(currentCardIndex > 3) {
+        document.getElementById('deck-next-btn').style.display = 'inline-block';
+      }
+    }
+  }
+
+  // Opening the letter/envelope
+  function openLetter() {
+    document.getElementById('envelope').style.display = 'none';
+    document.getElementById('letter').style.display = 'block';
+  }
+
+  // Continuous background hearts generation
+  function createBgHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('bg-heart');
+    const types = ['❤️', '💖', '💕', '✨', '🌸'];
+    heart.innerText = types[Math.floor(Math.random() * types.length)];
+    heart.style.left = Math.random() * 100 + "vw";
+    const size = Math.random() * 18 + 12;
+    heart.style.fontSize = size + "px";
+    const duration = Math.random() * 3 + 4;
+    heart.style.animationDuration = duration + "s";
+    
+    document.body.appendChild(heart);
+    setTimeout(() => { heart.remove(); }, duration * 1000);
+  }
+  setInterval(createBgHeart, 400);
 </script>
 
 </body>
-</html>
+  </html>
+  
